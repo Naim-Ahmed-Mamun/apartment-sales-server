@@ -109,6 +109,17 @@ async function run(){
             const query = {_id:ObjectId(id)};
             const result = await orderCollection.deleteOne(query);
             res.json(result)
+        });
+        // makeAdmin check
+        app.put('/addAdmin/:email',async(req,res) => {
+            const email = req.params.email;
+            const filter = {email:email};
+            const updateDoc = {
+                $set:{role:'admin'}
+            }
+            const result = await userCollection.updateOne(filter,updateDoc);
+            console.log(result)
+            res.json(result)
         })
     }
     finally{
