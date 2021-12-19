@@ -82,6 +82,7 @@ async function run(){
         app.post('/placeOrder',async(req,res) => {
             const orderItem = req.body;
             const result = await orderCollection.insertOne(orderItem);
+            // console.log(result)
             res.json(result)
         });
         // my Order get
@@ -124,6 +125,14 @@ async function run(){
             }
             const result = await userCollection.updateOne(filter,updateDoc);
             console.log(result)
+            res.json(result)
+        });
+        // bookService get
+        app.get('/bookService/:serviceName',async(req,res) => {
+            const name = req.params.serviceName;
+            const query = {name:name}
+            const result = await serviceCollection.findOne(query);
+            // console.log(result)
             res.json(result)
         })
     }
