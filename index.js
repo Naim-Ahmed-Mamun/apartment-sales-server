@@ -26,6 +26,11 @@ async function run(){
         const orderCollection = database.collection('Orders');
         // get properties
         app.get('/properties',async(req,res) => {
+            const result = await serviceCollection.find({}).limit(6).toArray();
+            res.json(result)
+        });
+        // get all properties
+        app.get('/allProperties',async(req,res) => {
             const result = await serviceCollection.find({}).toArray();
             res.json(result)
         });
@@ -87,7 +92,7 @@ async function run(){
             const result = await orderCollection.find(query).toArray();
             res.json(result)
         });
-        // order list  get
+        // order list  get api
         app.get('/orderList',async(req,res) => {
             const result = await orderCollection.find({}).toArray();
             res.json(result)
